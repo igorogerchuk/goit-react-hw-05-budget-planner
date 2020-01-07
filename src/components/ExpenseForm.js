@@ -4,11 +4,14 @@ import Label from './shared/Label';
 import Input from './shared/Input';
 import Button from './shared/Button';
 
+import * as actions from '../redux/actions';
+import { connect } from 'react-redux';
+
 const labelStyles = `
   margin-bottom: 16px;  
 `;
 
-export default class ExpenseForm extends Component {
+class ExpenseForm extends Component {
   state = {
     name: '',
     amount: 0,
@@ -54,3 +57,11 @@ export default class ExpenseForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSave: ({ name, amount }) => dispatch(actions.add({ name, amount })),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ExpenseForm);

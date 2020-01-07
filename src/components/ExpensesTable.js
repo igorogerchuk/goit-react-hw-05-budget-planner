@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './shared/Button';
+
+import Expense from './Expense';
+import { connect } from 'react-redux';
+import * as selectors from '../redux/selectors';
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -18,7 +21,7 @@ const Table = styled.table`
   }
 `;
 
-const ExpensesTable = ({ items = [], onRemove }) => (
+const ExpensesTable = ({ expenses = [], onRemove }) => (
   <Table>
     <thead>
       <tr>
@@ -28,17 +31,17 @@ const ExpensesTable = ({ items = [], onRemove }) => (
       </tr>
     </thead>
     <tbody>
-      {items.map(({ id, name, amount }) => (
-        <tr key={id}>
-          <td>{name}</td>
-          <td>{amount}</td>
-          <td>
-            <Button label="Delete" onClick={() => onRemove(id)} />
-          </td>
-        </tr>
+      {expenses.map(({ id }) => (
+        <Expense key={id} id={id} />
       ))}
     </tbody>
   </Table>
 );
 
-export default ExpensesTable;
+const mapStateToProps = state => {
+  return {
+    expenses: selectors.getExpenses(state),
+  };
+};
+
+export default connect(mapStateToProps)(ExpensesTable);

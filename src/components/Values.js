@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Value from './Value';
 
+import { connect } from 'react-redux';
+import * as selectors from '../redux/selectors';
+
 const Container = styled.section`
   display: inline-flex;
   justify-content: space-between;
@@ -16,4 +19,12 @@ const Values = ({ budget, expenses, balance }) => (
   </Container>
 );
 
-export default Values;
+const mapStateToProps = state => {
+  return {
+    budget: selectors.getBudget(state),
+    expenses: selectors.getTotalExpenses(state),
+    balance: selectors.getBalance(state),
+  };
+};
+
+export default connect(mapStateToProps)(Values);
