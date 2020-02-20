@@ -14,7 +14,7 @@ const labelStyles = `
 class ExpenseForm extends Component {
   state = {
     name: '',
-    amount: 0,
+    amount: '',
   };
 
   handleChange = e => {
@@ -25,9 +25,16 @@ class ExpenseForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
+    if (this.state.amount <= 0) {
+      alert('expense amount must be more then 0');
+      return;
+    }
+    if (this.state.name === '') {
+      alert('expense name can`t be empty');
+      return;
+    }
     this.props.onSave({ ...this.state });
-    this.setState({ name: '', amount: 0 });
+    this.setState({ name: '', amount: '' });
   };
 
   render() {
@@ -49,6 +56,7 @@ class ExpenseForm extends Component {
             name="amount"
             value={this.state.amount}
             onChange={this.handleChange}
+            placeholder="0"
           />
         </Label>
 

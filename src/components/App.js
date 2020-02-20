@@ -20,14 +20,6 @@ const Container = styled.div`
 export default class App extends Component {
   render() {
     return (
-      // <Container>
-      //   <BudgetForm onSave={this.saveBudget} />
-      //   <Values budget={budget} expenses={totalExpenses} balance={balance} />
-      //   <ExpenseForm onSave={this.addExpense} />
-      //   {expenses.length > 0 && (
-      //     <ExpensesTable items={expenses} onRemove={this.removeExpense} />
-      //   )}
-      // </Container>
       <Container>
         <BudgetForm />
         <Values />

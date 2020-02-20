@@ -21,6 +21,15 @@ const Input = ({
   value = '',
   onChange = () => null,
   name = '',
-}) => <StyledInput type={type} value={value} onChange={onChange} name={name} />;
+  placeholder = '',
+}) => (
+  <StyledInput
+    type={type}
+    value={value}
+    onChange={onChange}
+    name={name}
+    placeholder={placeholder}
+  />
+);
 
 export default Input;
